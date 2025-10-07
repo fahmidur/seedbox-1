@@ -14,15 +14,15 @@ Before installing this project, ensure you have the following:
 
 ## Installation & Setup
 
-1. Configure.
-
-Run: 
+### Run Configure
 
 ```
 ./configure
 ```
 
-2. Copy in your OpenVPN 'ovpn' Files.
+This will install most of the packages needed.
+
+### Copy in your OpenVPN 'ovpn' Files
 
 Copy your OpenVPN configuration file into `./custom.devl.ovpn`. 
 This will be treated as local Development OpenVPN file. 
@@ -32,7 +32,11 @@ Create another separate OpenVPN for your actual Seedbox, copy this to
 
 We treat the actual seedbox as the Production environment.
 
-3. Create a config.yaml 
+NOTE: If your ovpn file contains a 'remote <address>' line
+with a domain name instead of an IP address -- you must convert
+this to an IP Address.
+
+### Create a config.yaml
 
 Copy `./config.sample.yaml` to `./config.yaml`,
 and fill in the following fields:
@@ -75,6 +79,7 @@ To ensure that everything works just the same on your seedbox, run `rake start` 
 and ensure that everything comes up.
 Once you are confident things are working, Hit Ctrl+C to shut it down.
 
+### Service Install
 Now we can proceed to install this as a systemd service. Run:
 
 ```bash
@@ -95,7 +100,7 @@ You should be able to reach the QBittorrent WebUI at http://localhost:9092.
 And, if you now launch your SOCKS-5 configured Firefox proxy, which is expecting a SOCKS-5 Server
 at localhost:1080 -- it will also work. 
 
-## Uninstallation
+### Service Uninstall 
 
 To remove/uninstall the systemd service, simply run:
 
@@ -103,7 +108,8 @@ To remove/uninstall the systemd service, simply run:
 rake service_uninstall
 ```
 
-## Service + Ports
+
+## Services + Ports
 
 - [QBitorrent WebUI on Localhost 9092](http://localhost:9092/?)
 

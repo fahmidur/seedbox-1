@@ -4,4 +4,5 @@ remote_host: sbox
 prod_hostname: actual_sbox_hostname
 env:
   BT_DOWNLOADS_PATH: "~/data/bt"
+  FIREWALL_VPN_INPUT_PORTS: 6161
 
