@@ -110,7 +110,7 @@ rake service_uninstall
 
 ## Services + Ports Open
 
-- <a href='http://localhost:9092/?' target='_blank'>QBitorrent WebUI on Port 9092</a>
+- [QBitorrent WebUI on Port 9092](http://localhost:9092/?)
 - ShadowSocks on Port 8388
 - HTTP Proxy on Port  8888
 
