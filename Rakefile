@@ -10,6 +10,7 @@ $config = YAML.load_file(config_path)
 
 $compose = YAML.load_file('compose.yaml')
 $cman = 'podman'
+$qbt_config_dir = 'qbittorrent-config'
 
 def truthy?(str)
   ['1', 'true', 't'].member?(str.to_s.downcase)
@@ -21,8 +22,6 @@ rescue => err
   return nil
 end
 
-$qbt_config_dir = 'qbittorrent-config'
-
 def which(prog)
   out = `which #{prog}`.strip
   return nil if out.size == 0
@@ -33,7 +32,7 @@ def uname
   return ENV['USER']
 end
 
-def hostname()
+def hostname
   return `hostname`.strip
 end
 
@@ -274,12 +273,12 @@ task :service_start do
   sh "sudo systemctl start #{service_name}"
 end
 
-desc "Stop the system service"
+desc "Stop the systemd service"
 task :service_stop do 
   sh "sudo systemctl stop #{service_name}"
 end
 
-desc "Status forsystem service"
+desc "Status for systemd service"
 task :service_status do 
   sh "sudo systemctl status #{service_name}"
 end
