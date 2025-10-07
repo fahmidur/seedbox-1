@@ -5,7 +5,7 @@ qbittorrent-config/**
 *.service
 *.env
 config.yaml
+Procfile
 connect.Procfile
 tmp
 tmp/**
-
