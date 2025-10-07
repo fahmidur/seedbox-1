@@ -1,0 +1,21 @@
+[Unit]
+Description=sbox1 for <%= uname %>
+After=network.target
+
+[Service]
+Type=simple
+EnvironmentFile=<%= envpath %>
+WorkingDirectory=<%= thisdir %>
+ExecStart=<%= "#{rakepath} start" %>
+ExecStop=<%= "#{rakepath} stop" %>
+User=<%= uname %>
+Group=<%= uname %>
+Restart=always
+RestartSec=5
+StartLimitInterval=0
+
+[Install]
+WantedBy=multi-user.target
+Alias=sbox1.<%= uname %>.service
+
+

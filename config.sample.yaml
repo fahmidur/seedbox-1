@@ -1,0 +1,7 @@
+---
+default: true
+remote_host: sbox
+prod_hostname: actual_sbox_hostname
+env:
+  BT_DOWNLOADS_PATH: "~/data/bt"
+

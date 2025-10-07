@@ -1,0 +1,22 @@
+#!/bin/bash
+
+sudo apt-get update
+
+if [ -z "$(which ruby)" ]; then
+  echo "Installing Ruby ..."
+  # Needed for Ruby/Rake
+  sudo apt-get install -y ruby-full
+fi
+
+if [ -z "$(which ss-local)" ]; then
+  # Needed for ss-local ShadowSocks <-> Socks5 client
+  echo "Installing ShadowSocks ..."
+  sudo apt-get install -y shadowsocks-libev
+fi
+
+if [ -z "$(which podman)" ]; then
+  # Needed for containers
+  echo "Installing Podman ..."
+  sudo apt-get install -y podman
+fi
+

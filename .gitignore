@@ -1,0 +1,11 @@
+qbittorrent-config
+qbittorrent-config/**
+*.pid
+*.ovpn
+*.service
+*.env
+config.yaml
+connect.Procfile
+tmp
+tmp/**
+
