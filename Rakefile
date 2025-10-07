@@ -46,7 +46,10 @@ def get_ovpn_file
 end
 
 def get_config_envs
-  config_env = $config['env'].clone
+  sbox_env = get_sbox1_env()
+  config_env = {}
+  config_env.merge!($config['env'] || {})
+  config_env.merge!(($config["env_#{sbox_env}"] || {}))
   config_env.each do |k, v|
     if k.end_with?('_PATH')
       config_env[k] = File.expand_path(v)
@@ -56,6 +59,8 @@ def get_config_envs
 end
 
 def get_sbox1_env
+  force_sbox_env = ENV['FORCE_SBOX_ENV']
+  return force_sbox_env if force_sbox_env
   sbox1_env = 'devl'
   if hostname() == $config['prod_hostname']
     sbox1_env = 'prod'
@@ -162,7 +167,7 @@ task :ss_service_install => [:mk_ss_service_env] do
 end
 
 desc "Stop"
-task :stop => [:ss_stop] do 
+task :stop => [:mk_env, :ss_stop] do 
   sh "#{$cman} compose stop"
   sh "#{$cman} compose down"
 end
