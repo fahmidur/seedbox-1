@@ -13,7 +13,7 @@ services:
       - 8888:8888/tcp # HTTP proxy
       - 8388:8388/tcp # Shadowsocks
       - 8388:8388/udp # Shadowsocks
-      - 9092:9092 # Torrent webui
+      - 9092:9092     # Torrent webui
     volumes:
       - ./${OVPN_FILE}:/gluetun/custom.conf:ro
     environment:
@@ -23,8 +23,6 @@ services:
       - OPENVPN_CUSTOM_CONFIG=/gluetun/custom.conf
       - SHADOWSOCKS=on
       - SHADOWSOCKS_PASSWORD=shadowpass
-      - VPN_PORT_FORWARDING=${VPN_PORT_FORWARDING}
-      - VPN_PORT_FORWARDING_LISTENING_PORT=${VPN_PORT_FORWARDING_LISTENING_PORT}
       - FIREWALL_VPN_INPUT_PORTS=${FIREWALL_VPN_INPUT_PORTS}
       # OpenVPN:
       # - OPENVPN_USER=
