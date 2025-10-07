@@ -24,17 +24,26 @@ This will install most of the packages needed.
 
 ### Copy in Your OpenVPN Files
 
-Copy your OpenVPN configuration file into `./custom.devl.ovpn`. 
-This will be treated as local Development OpenVPN file. 
+Generate an OpenVPN configuration for your development machine. 
+Copy this file into `./custom.devl.ovpn`. 
+This will be used by the local Development environment.
 
-Create another separate OpenVPN for your actual Seedbox, copy this to
-`./custom.prod.ovpn`. 
+Generate another separate OpenVPN configuration file for your actual seedbox,
+copy this to `./custom.prod.ovpn`. 
+This will be used by the Production environment, which we will configure by hostname, 
+as the hostname of your remote seedbox.
 
-We treat the actual seedbox as the Production environment.
+We do this separation because for most VPN providers, like AirVPN, you cannot use the same configuration, which 
+has the same device assignment, at the same time.
+Therefore, if you want to keep this Compose setup running on your seedbox, while iterating on changes
+locally, you will need two different OpenVPN configuration files.
 
-NOTE: If your ovpn file contains a 'remote <address>' line
+If you have no need for this separation, as in you are always sitting in front of your always-on seedbox,
+then you can simply copy your one OpenVPN configuration file to `./custom.ovpn`.
+
+NOTE: If your ovpn file contains a `remote [some-domain]` line
 with a domain name instead of an IP address -- you must convert
-this to an IP Address.
+this to an IP Address. You can do this with `dig` or `nslookup`.
 
 ### Create a config.yaml
 
@@ -46,7 +55,7 @@ and fill in the following fields:
   must match the output of running `hostname` on the Seedbox.
 - `env.BT_DOWNLOADS_PATH` -- This should be the local path to your Torrent
   download folder. This will be mounted into the torrent service container.
-
+- `env.FIREWALL_VPN_INPUT_PORTS` -- This should be the open port assigned to your VPN device.
 
 ## Usage (Local/Development)
 
