@@ -18,5 +18,7 @@ if [ -z "$(which podman)" ]; then
   # Needed for containers
   echo "Installing Podman ..."
   sudo apt-get install -y podman
+  systemctl --user enable podman.socket
+  systemctl --user start podman.socket
 fi
 
