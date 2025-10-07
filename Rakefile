@@ -11,6 +11,10 @@ $config = YAML.load_file(config_path)
 $compose = YAML.load_file('compose.yaml')
 $cman = 'podman'
 
+def truthy?(str)
+  ['1', 'true', 't'].member?(str.to_s.downcase)
+end
+
 def get_shadowpass
   return $compose['services']['gluetun']['environment'].grep(/SHADOWSOCKS_PASSWORD/).first.split('=')[1]
 rescue => err
@@ -132,7 +136,11 @@ task :ss_start => [:ss_stop] do
     puts "ERROR: could not find shadowpass"
     exit 1
   end
-  pidopt = "-f shadow.pid"
+  if truthy?(ENV['NOFORK'])
+    pidopt = ""
+  else
+    pidopt = "-f shadow.pid"
+  end
   cmd = "ss-local -s 127.0.0.1 -p 8388 -l 1080 -k #{shadowpass} #{pidopt}"
   cmd.gsub(/\s+/, ' ').strip
   exec(cmd)
