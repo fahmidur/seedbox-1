@@ -146,6 +146,11 @@ task :ss_start => [:ss_stop] do
   exec(cmd)
 end
 
+desc "ShadowSocks Proxy Install"
+task :ss_service_install do 
+  # TODO: install NOFORK=1 ss_start as a service"
+end
+
 desc "Stop"
 task :stop => [:ss_stop] do 
   sh "#{$cman} compose stop"
