@@ -1,6 +1,6 @@
 # README
 
-A simple seedbox setup using Gluetun, running on Podman.
+A simple seedbox setup using [Gluetun](https://github.com/qdm12/gluetun) + [QBittorrent](https://github.com/qbittorrent/qBittorrent), running on Podman.
 For a friend.
 
 ## Prerequisites
@@ -124,5 +124,18 @@ rake service_uninstall
 - [QBitorrent WebUI on Port 9092](http://localhost:9092/?)
 - ShadowSocks on Port 8388
 - HTTP Proxy on Port  8888
+
+## Support / Sponsor / Donate
+
+The [Gluetun](https://github.com/qdm12/gluetun) image used here is crafted by [Quentin McGaw + Contributors](https://github.com/qdm12/gluetun/graphs/contributors). 
+Please support their work -- [Gluetun Sponsor Link](https://github.com/sponsors/qdm12)
+
+The qBittorrent image used here is crafted by the hard working folks of [LinuxServer.io](https://www.linuxserver.io/). 
+Please support their work -- [LinuxServer.io Donate Link](https://www.linuxserver.io/donate)
+
+The qBittorrent software used in the qBittorrent Image is crafted by the [qBittorrent authors](https://github.com/qbittorrent/qBittorrent/graphs/contributors). 
+Please support their work -- [qBittorrent Donate Link](https://www.qbittorrent.org/donate)
+
+Do not donate to this project -- this is a toy designed to make setup easier for a friend.
 
 
