@@ -80,6 +80,7 @@ and ensure that everything comes up.
 Once you are confident things are working, Hit Ctrl+C to shut it down.
 
 ### Service Install
+
 Now we can proceed to install this as a systemd service. Run:
 
 ```bash
@@ -97,8 +98,8 @@ To make connect to the services running on your seedbox, run `rake connect`.
 This will create an SSH tunnel with forwarded ports for the QBittorrent WebUI and Shadowsocks. 
 
 You should be able to reach the QBittorrent WebUI at http://localhost:9092.
-And, if you now launch your SOCKS-5 configured Firefox proxy, which is expecting a SOCKS-5 Server
-at localhost:1080 -- it will also work. 
+If you now launch your SOCKS-5 proxy configured Firefox, which is expecting a SOCKS-5 Server
+at localhost:1080, it will also work. 
 
 ### Service Uninstall 
 
