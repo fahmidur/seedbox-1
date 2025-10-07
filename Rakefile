@@ -146,9 +146,16 @@ task :ss_start => [:ss_stop] do
   exec(cmd)
 end
 
-desc "ShadowSocks Proxy Install"
-task :ss_service_install do 
-  # TODO: install NOFORK=1 ss_start as a service"
+desc "ShadowSocks Proxy -- Install as a Service"
+task :ss_service_install => [:mk_ss_service_env] do 
+  ss_service_name = "sbox1ss.#{uname}.service"
+  service_templ = ERB.new(IO.read('./sbox1ss.service.erb'))
+  service_body = service_templ.result(binding)
+  IO.write(ss_service_name, service_body)
+  sh "sudo cp #{service_name} /etc/systemd/system/"
+  sh "sudo systemctl daemon-reload"
+  sh "sudo systemctl enable #{ss_service_name}"
+  sh "sudo systemctl start #{ss_service_name}"
 end
 
 desc "Stop"
@@ -228,6 +235,12 @@ task :mk_service_env do
   # service_env = ENV.to_h.merge(gen_env())
   service_env = ENV.to_h
   write_env('service.env', service_env)
+end
+
+task :mk_ss_service_env do 
+  service_env = ENV.to_h
+  service_env['NOFORK'] = '1'
+  write_env('service-ss.env', service_env)
 end
 
 desc "Install systemd service"
