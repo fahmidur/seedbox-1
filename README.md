@@ -22,7 +22,7 @@ Before installing this project, ensure you have the following:
 
 This will install most of the packages needed.
 
-### Copy in your OpenVPN 'ovpn' Files
+### Copy in Your OpenVPN Files
 
 Copy your OpenVPN configuration file into `./custom.devl.ovpn`. 
 This will be treated as local Development OpenVPN file. 
@@ -108,8 +108,10 @@ To remove/uninstall the systemd service, simply run:
 rake service_uninstall
 ```
 
+## Services + Ports Open
 
-## Services + Ports
+- [QBitorrent WebUI on Port 9092](http://localhost:9092/?)
+- ShadowSocks on Port 8388
+- HTTP Proxy on Port  8888
 
-- [QBitorrent WebUI on Localhost 9092](http://localhost:9092/?)
 
