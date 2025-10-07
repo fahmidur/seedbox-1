@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-EnvironmentFile=<%= envpath %>
+EnvironmentFile=<%= ss_envpath %>
 WorkingDirectory=<%= thisdir %>
 ExecStart=<%= "#{rakepath} ss_start" %>
 User=<%= uname %>

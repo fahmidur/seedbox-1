@@ -91,6 +91,10 @@ def envpath
   File.join(thisdir, 'service.env')
 end
 
+def ss_envpath
+  File.join(thisdir, 'service-ss.env')
+end
+
 def blank?(str)
   !str || str =~ /^\s*$/
 end
@@ -152,7 +156,7 @@ task :ss_service_install => [:mk_ss_service_env] do
   service_templ = ERB.new(IO.read('./sbox1ss.service.erb'))
   service_body = service_templ.result(binding)
   IO.write(ss_service_name, service_body)
-  sh "sudo cp #{service_name} /etc/systemd/system/"
+  sh "sudo cp #{ss_service_name} /etc/systemd/system/"
   sh "sudo systemctl daemon-reload"
   sh "sudo systemctl enable #{ss_service_name}"
   sh "sudo systemctl start #{ss_service_name}"
