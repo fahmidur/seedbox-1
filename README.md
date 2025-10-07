@@ -66,12 +66,13 @@ To do so run:
 rake start
 ```
 
-Once everything is up. Run `rake ss_start` -- This will create start a ss-local proxy to connect the seedbox.
+Once everything is up. Run `rake ss_start` -- This will start an ss-local proxy
+client to connect to the locally running seedbox containers.
 
-Create a new Firefox profile, with SOCKS-5 Proxy set to localhost port 1080.
+Create a new Firefox profile with SOCKS-5 Proxy set to localhost port 1080.
 
 Once Firefox is connected through your SOCKS-5 Proxy,
-proceed to leak testing your outbound ip with a site like [IPLeak.net](https://ipleak.net/).
+proceed to leak testing your outbound IP with a site like [IPLeak.net](https://ipleak.net/).
 
 ## Usage (Seedbox/Production)
 
