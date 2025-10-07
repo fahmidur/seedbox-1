@@ -7,5 +7,6 @@ qbittorrent-config/**
 config.yaml
 Procfile
 connect.Procfile
+*.Procfile
 tmp
 tmp/**
