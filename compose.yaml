@@ -39,8 +39,8 @@ services:
     image: linuxserver/qbittorrent
     network_mode: "service:gluetun"
     environment:
-      - PUID=1000 # Your user ID
-      - PGID=1000 # Your group ID
+      - PUID=${MY_UID} # Your user ID
+      - PGID=${MY_GID} # Your group ID
       - WEBUI_PORT=9092
       - LSIO_NON_ROOT_USER=root
     volumes:

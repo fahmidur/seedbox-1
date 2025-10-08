@@ -78,9 +78,17 @@ def gen_env()
     'HOME' => ENV['HOME'],
     'SBOX1_ENV' => sbox1_env,
     'OVPN_FILE' => ovpn_file,
+    'MY_UID' => Process.uid,
+    'MY_GID' => Process.gid,
   }
   out.merge!(get_config_envs)
   return out
+end
+
+def get_bt_downloads_path 
+  download_dir = $config['env']['BT_DOWNLOADS_PATH'] rescue nil
+  return nil unless download_dir
+  return File.expand_path(download_dir)
 end
 
 def thisdir 
@@ -311,6 +319,18 @@ end
 
 task :mk_env do 
   write_env('.env', gen_env())
+end
+
+task :fix_perms do 
+  puts "qbt_config_dir = #{$qbt_config_dir}"
+  if Dir.exist?($qbt_config_dir)
+    sh "sudo chown -R #{uname}:#{uname} #{$qbt_config_dir}"
+  end
+  downloads_dir = get_bt_downloads_path()
+  puts "downloads_dir = #{downloads_dir}"
+  if downloads_dir && Dir.exist?(downloads_dir)
+    sh "sudo chown -R #{uname}:#{uname} #{downloads_dir}"
+  end
 end
 
 task :debug do 
