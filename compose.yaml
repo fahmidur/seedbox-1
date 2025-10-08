@@ -42,6 +42,7 @@ services:
       - PUID=1000 # Your user ID
       - PGID=1000 # Your group ID
       - WEBUI_PORT=9092
+      - LSIO_NON_ROOT_USER=root
     volumes:
       - ./qbittorrent-config:/config
       - ${BT_DOWNLOADS_PATH}:/downloads
