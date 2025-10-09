@@ -162,9 +162,12 @@ task :ss_start => [:ss_stop] do
   exec(cmd)
 end
 
-desc "ShadowSocks Proxy -- Install as a Service"
+def ss_service_name
+  return $ss_service_name ||= "sbox1ss.#{uname}.service"
+end
+
+desc "ShadowSocks Proxy Client Service -- Install"
 task :ss_service_install => [:mk_ss_service_env] do 
-  ss_service_name = "sbox1ss.#{uname}.service"
   service_templ = ERB.new(IO.read('./sbox1ss.service.erb'))
   service_body = service_templ.result(binding)
   IO.write(ss_service_name, service_body)
@@ -172,6 +175,21 @@ task :ss_service_install => [:mk_ss_service_env] do
   sh "sudo systemctl daemon-reload"
   sh "sudo systemctl enable #{ss_service_name}"
   sh "sudo systemctl start #{ss_service_name}"
+end
+
+desc "ShadowSocks Proxy Client Service -- Status"
+task :ss_service_status => [:mk_ss_service_env] do 
+  sh "sudo systemctl status #{ss_service_name} || true"
+end
+
+desc "ShadowSocks Proxy Client Service -- Start"
+task :ss_service_start => [:mk_ss_service_env] do 
+  sh "sudo systemctl start #{ss_service_name} || true"
+end
+
+desc "ShadowSocks Proxy Client Service -- Stop"
+task :ss_service_stop => [:mk_ss_service_env] do 
+  sh "sudo systemctl stop #{ss_service_name} || true"
 end
 
 desc "Stop"
