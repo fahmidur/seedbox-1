@@ -281,6 +281,10 @@ task :service_uninstall => [:service_stop] do
 end
 task :service_remove => [:service_uninstall]
 
+desc "Reinstall systemd service"
+task :service_reinstall => [:service_uninstall, :fix_perms, :service_install] do 
+end
+
 desc "Start the systemd service"
 task :service_start do 
   sh "sudo systemctl start #{service_name}"
