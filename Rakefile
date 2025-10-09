@@ -128,6 +128,10 @@ def get_remote_host
   return remote_host
 end
 
+def ss_service_name
+  return $ss_service_name ||= "sbox1ss.#{uname}.service"
+end
+
 #----------------------------------------------------------
 # TASKS
 #----------------------------------------------------------
@@ -160,10 +164,6 @@ task :ss_start => [:ss_stop] do
   cmd = "ss-local -s 127.0.0.1 -p 8388 -l 1080 -k #{shadowpass} #{pidopt}"
   cmd.gsub(/\s+/, ' ').strip
   exec(cmd)
-end
-
-def ss_service_name
-  return $ss_service_name ||= "sbox1ss.#{uname}.service"
 end
 
 desc "ShadowSocks Proxy Client Service -- Install"
