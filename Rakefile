@@ -16,6 +16,16 @@ def truthy?(str)
   ['1', 'true', 't'].member?(str.to_s.downcase)
 end
 
+def get_sbox1_env
+  force_sbox_env = ENV['FORCE_SBOX_ENV']
+  return force_sbox_env if force_sbox_env
+  sbox1_env = 'devl'
+  if hostname() == $config['prod_hostname']
+    sbox1_env = 'prod'
+  end
+  return sbox1_env
+end
+
 def get_shadowpass
   return $compose['services']['gluetun']['environment'].grep(/SHADOWSOCKS_PASSWORD/).first.split('=')[1]
 rescue => err
@@ -56,16 +66,6 @@ def get_config_envs
     end
   end
   return config_env
-end
-
-def get_sbox1_env
-  force_sbox_env = ENV['FORCE_SBOX_ENV']
-  return force_sbox_env if force_sbox_env
-  sbox1_env = 'devl'
-  if hostname() == $config['prod_hostname']
-    sbox1_env = 'prod'
-  end
-  return sbox1_env
 end
 
 def gen_env()
