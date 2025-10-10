@@ -33,7 +33,7 @@ copy this to `./custom.prod.ovpn`.
 This will be used by the Production environment, which we will configure by hostname, 
 as the hostname of your remote seedbox.
 
-We do this separation because for most VPN providers, like AirVPN, you cannot use the same configuration, which 
+We use this separation because for most VPN providers (like AirVPN) you cannot use the same configuration, which 
 has the same device assignment, at the same time.
 Therefore, if you want to keep this Compose setup running on your seedbox, while iterating on changes
 locally, you will need two different OpenVPN configuration files.
@@ -98,8 +98,10 @@ rake service_install
 ```
 
 This will install a systemd service named `sbox1.<username>.service` which
-effectively runs `rake start`. It enable the service to start on boot. And it
-will start the service immediately.
+effectively runs `rake start`. 
+It enables the service to start on boot and will start the service immediately.
+
+### Accessing Services Remotely
 
 How do I access QBitorrent on my remote Seedbox? 
 How do I browse the web through the VPN that is running on the Seedbox?
