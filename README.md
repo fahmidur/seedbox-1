@@ -104,7 +104,7 @@ will start the service immediately.
 How do I access QBitorrent on my remote Seedbox? 
 How do I browse the web through the VPN that is running on the Seedbox?
 
-To make connect to the services running on your seedbox, run `rake connect`. 
+To connect to the services running on your seedbox, run `rake connect`. 
 This will create an SSH tunnel with forwarded ports for the QBittorrent WebUI and Shadowsocks. 
 
 You should be able to reach the QBittorrent WebUI at http://localhost:9092.
