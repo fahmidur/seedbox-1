@@ -12,6 +12,8 @@ if [ -z "$(which ss-local)" ]; then
   # Needed for ss-local ShadowSocks <-> Socks5 client
   echo "Installing ShadowSocks ..."
   sudo apt-get install -y shadowsocks-libev
+  sudo systemctl disable shadowsocks-libev.service
+  sudo systemctl stop shadowsocks-libev.service
 fi
 
 if [ -z "$(which podman)" ]; then
