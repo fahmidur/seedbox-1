@@ -150,7 +150,7 @@ task :ss_stop do
 end
 
 desc "ShadowSocks Proxy -- Start"
-task :ss_start => [:ss_stop] do 
+task :ss_start => [:ss_stop, :mk_ss_service_env] do 
   shadowpass = get_shadowpass
   unless shadowpass 
     puts "ERROR: could not find shadowpass"
