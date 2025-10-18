@@ -1,26 +1,52 @@
 #!/bin/bash
 
-sudo apt-get update
+_APT_UPDATE_DONE=false 
+apt_update() {
+  if ! "$_APT_UPDATE_DONE"; then 
+    sudo apt-get -y update
+    _APT_UPDATE_DONE=true
+  fi
+}
 
-if [ -z "$(which ruby)" ]; then
-  echo "Installing Ruby ..."
+install_package() {
+  local packname="$1"
+  apt_update
+  echo "installing packname=${packname}"
+  sudo apt-get install -y ${packname}
+}
+
+if command -v ruby > /dev/null 2>&1; then
+  echo "ruby | ruby is already installed"
+else
   # Needed for Ruby/Rake
-  sudo apt-get install -y ruby-full
+  echo "ruby | installing ruby ..."
+  install_package ruby-full
 fi
 
-if [ -z "$(which ss-local)" ]; then
+if command -v ss-local > /dev/null 2>&1; then
+  echo "shadowsocks | ss-local is already installed"
+else
   # Needed for ss-local ShadowSocks <-> Socks5 client
-  echo "Installing ShadowSocks ..."
-  sudo apt-get install -y shadowsocks-libev
+  echo "shadowsocks | installing shadowsocks ..."
+  install_package shadowsocks-libev
   sudo systemctl disable shadowsocks-libev.service
   sudo systemctl stop shadowsocks-libev.service
 fi
 
-if [ -z "$(which podman)" ]; then
+if command -v podman > /dev/null 2>&1; then
+  echo "podman | podman is already installed"
+else
   # Needed for containers
-  echo "Installing Podman ..."
-  sudo apt-get install -y podman
+  echo "podman | installing podman ..."
+  install_package podman
   systemctl --user enable podman.socket
   systemctl --user start podman.socket
+fi
+
+if command -v rsync > /dev/null 2>&1; then 
+  echo "rsync | rsync is already installed"
+else
+  echo "rsync | installing rsync ..."
+  install_package rsync
 fi
 
