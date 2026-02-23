@@ -31,6 +31,19 @@ else
   install_package shadowsocks-libev
   sudo systemctl disable shadowsocks-libev.service
   sudo systemctl stop shadowsocks-libev.service
+  sudo systemctl daemon-reload
+fi
+
+LIBEV_SNAME="shadowsocks-libev.service"
+if systemctl is-enabled $LIBEV_SNAME > /dev/null; then
+  echo "ss-local-disable | service $LIBEV_SNAME is enabled"
+  echo "ss-local-disable | disabling the service"
+  sudo systemctl disable shadowsocks-libev.service
+  sudo systemctl stop shadowsocks-libev.service
+  sudo systemctl daemon-reload
+else
+  echo "ss-local-disable | service $LIBEV_SNAME is NOT enabled"
+  echo "ss-local-disable | nothing more to do"
 fi
 
 if command -v podman > /dev/null 2>&1; then
