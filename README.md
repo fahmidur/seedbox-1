@@ -49,7 +49,7 @@ this to an IP Address. You can do this with `dig` or `nslookup`.
 
 Copy `./config.sample.yaml` to `./config.yaml`,
 and fill in the following fields:
-- `remote_host` -- This should be SSH Host (alias) used that you use to SSH
+- `remote_host` -- This should be the SSH Host (alias) used that you use to SSH
   into your Seedbox.
 - `prod_hostname` -- This should be the actual Hostname of your Seedbox. This
   must match the output of running `hostname` on the Seedbox.
